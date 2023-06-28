@@ -6,7 +6,7 @@
     <title>pinterest page 연습</title>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/2.1.0/jquery.masonry.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js"></script>
+    <script src="imagesloaded.min.js"></script>
     <style>
         *{
             margin: 0;
@@ -20,7 +20,7 @@
             border: 0;
         }
         li{
-            list-style: none;
+            list-style: none;           
         }
         html{
             background: #f7f5f5;
@@ -127,8 +127,114 @@
             
             
         }
+        .paper{
+            width: 190px;
+            margin-top: 10px;
+            padding: 15px 15px 0;
+            font-size: 11px;
+            background: #FFFFFF;
+            box-shadow: 0 1px 3px rgba(34,25,25,0.4);
+        }
+        .paper-content{
+            margin: 0 -15px;
+            margin-top: 10px;
+            padding: 10px 15px;
+            background: #F2F0F0;
+            overflow: hidden;
+        }
+        .paper-description{
+            margin: 10px 0;
+        }
+        .paper-link{
+            display: block;
+            float: left;
+        }
+        .paper-text{
+            float: left;
+            width: 150px;
+            margin-left: 10px;
+        }
+        #main-section{
+            width: 920px;
+            margin: 0 auto;
+        }
+        @media(max-width:919px){
+            #main-section{width: 690px;}
+        }
+        @media(min-width:930px)and(max-width:1149px){
+            #main-section{width: 1150px;}
+        }
+        @media(min-width:1150px)and(max-width:1379px){
+            #main-section{width: 1150px;}
+        }
+        @media(min-width:1380px){
+            #main-section{width: 1380px;}
+        }
+        #darken-background{
+            position: absolute;
+            top: 0; left: 0; right: 0; 
+            height: 100%;
+            display: none;
+            background: rgba(0,0,0,0.9);
+            z-index: 10000;
+            overflow-y: scroll;
+        }
+        #lightbox{
+            width:700px;
+            margin:20px auto; padding: 15px;
+            border: 1px solid #333333;
+            border-radius: 5px;
+            background: white;
+            box-shadow: 0 5px 5px rgba(34,25,25,0.4);
+            text-align: center;
+        }
+        .user-information{overflow:hidden; text-align:left;}
+        .user-information-image{float:left; width:70px;}
+        .user-information-text{float:right; width:620px;}
+        .lightbox-splitter{margin:10px 0;}
 
+
+        
     </style>
+    <script>
+        $(document).ready(function (){
+            $(".outer-menu").hover(function(){
+                $(this).find(".inner-menu").css("display","block");
+            },function(){
+                $(this).find(".inner-menu").css("display","none");
+
+            })
+        });
+        $(document).ready(function(){
+            $("#main-section").imagesLoaded(function(){
+                $("#main-section").masonry({
+                    itemSelector:'.paper',
+                    columnWidth:230,
+                    isAnimated:true
+                });
+            });
+        });
+        $(document).ready(function(){
+            function showLightBox(){
+                $('#darken-background').show();
+                $('#darken-background').css('top',$(window).scrollTop());
+                $('body').css('overflow','hidden');
+            }
+            function hideLightBox(){
+                $$('#darken-background').hide();
+
+                $('body').css('overflow','');
+            }
+            $('#darken-background').click(function(){
+                hideLightBox();
+            });
+            $('.paper').click(function(){showLightBox();});
+
+            $('#lightbox').click(function(event){
+                event.stopPropagation()
+            });
+        });
+    </script>
 </head>
 <body>
     <header id="main-header">
@@ -183,12 +289,56 @@
     <section id="main-section">
         <div class="paper">
             <div class="paper-holder">
-                <a ><img src="http://placehold.it/190x100" width="190"></a>
+                <a ><img src="http://placekitten.com/190/306" width="190"></a>
             </div>
             <p class="paper-description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatibus modi expedita minima laboriosam omnis, voluptates rerum ab! Fuga architecto maiores corporis, ullam molestias corrupti reiciendis velit maxime ipsum dolorem hic.</p>
             <div class="paper-content">
                 <a href="#" class="paper-link"></a>
-                <img src="http://placehold.it/190x100" >
+                <img src="http://placekitten.com/30/30" >
+                <p class="paper-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis reiciendis quis nihil similique doloribus. Nam dolorum in veniam, ipsum doloremque natus, neque doloribus aliquam, veritatis libero nemo odio officia numquam.</p>
+            </div>
+        </div>
+        <div class="paper">
+            <div class="paper-holder">
+                <a ><img src="http://placekitten.com/190/220" width="190"></a>
+            </div>
+            <p class="paper-description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatibus modi expedita minima laboriosam omnis, voluptates rerum ab! Fuga architecto maiores corporis, ullam molestias corrupti reiciendis velit maxime ipsum dolorem hic.</p>
+            <div class="paper-content">
+                <a href="#" class="paper-link"></a>
+                <img src="http://placekitten.com/30/30" >
+                <p class="paper-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis reiciendis quis nihil similique doloribus. Nam dolorum in veniam, ipsum doloremque natus, neque doloribus aliquam, veritatis libero nemo odio officia numquam.</p>
+            </div>
+        </div>
+        <div class="paper">
+            <div class="paper-holder">
+                <a ><img src="http://placekitten.com/190/380" width="190"></a>
+            </div>
+            <p class="paper-description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatibus modi expedita minima laboriosam omnis, voluptates rerum ab! Fuga architecto maiores corporis, ullam molestias corrupti reiciendis velit maxime ipsum dolorem hic.</p>
+            <div class="paper-content">
+                <a href="#" class="paper-link"></a>
+                <img src="http://placekitten.com/30/30" >
+                <p class="paper-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis reiciendis quis nihil similique doloribus. Nam dolorum in veniam, ipsum doloremque natus, neque doloribus aliquam, veritatis libero nemo odio officia numquam.</p>
+            </div>
+        </div>
+        <div class="paper">
+            <div class="paper-holder">
+                <a ><img src="http://placekitten.com/190/220" width="190"></a>
+            </div>
+            <p class="paper-description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatibus modi expedita minima laboriosam omnis, voluptates rerum ab! Fuga architecto maiores corporis, ullam molestias corrupti reiciendis velit maxime ipsum dolorem hic.</p>
+            <div class="paper-content">
+                <a href="#" class="paper-link"></a>
+                <img src="http://placekitten.com/30/30" >
+                <p class="paper-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis reiciendis quis nihil similique doloribus. Nam dolorum in veniam, ipsum doloremque natus, neque doloribus aliquam, veritatis libero nemo odio officia numquam.</p>
+            </div>
+        </div>
+        <div class="paper">
+            <div class="paper-holder">
+                <a ><img src="http://placehold.it/190x350" width="190"></a>
+            </div>
+            <p class="paper-description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatibus modi expedita minima laboriosam omnis, voluptates rerum ab! Fuga architecto maiores corporis, ullam molestias corrupti reiciendis velit maxime ipsum dolorem hic.</p>
+            <div class="paper-content">
+                <a href="#" class="paper-link"></a>
+                <img src="http://placehold.it/30x30" >
                 <p class="paper-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis reiciendis quis nihil similique doloribus. Nam dolorum in veniam, ipsum doloremque natus, neque doloribus aliquam, veritatis libero nemo odio officia numquam.</p>
             </div>
         </div>
